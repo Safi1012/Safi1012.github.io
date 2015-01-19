@@ -2,7 +2,7 @@
   "name": "Snake",
   "icons": [
     {
-      "src": "img/icon.png",
+      "src": "img/touch-icon_196.png",
       "sizes": "196x196",
       "type": "image/png",
       "density": "0.75"
