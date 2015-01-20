@@ -25,21 +25,13 @@ function( Snake, Rules, Playground, Score, PlaygroundView ) {
             rules = new Rules(true);
             score = new Score();
 
-
-        // used to reset interval in controlGame and resizing
-        var controlID,
-            resizeID;
-
-
         playground.generateFood(playground.playground, snake.snake);
         draw();
         controlGame();
 
-
-
         function controlGame() {
 
-            controlID = setInterval(function() {
+            var controlID = setInterval(function() {
 
                 if (rules.isSnakeAlive(snake.snake, playground.playground)) {
 
@@ -55,6 +47,8 @@ function( Snake, Rules, Playground, Score, PlaygroundView ) {
                 } else {
                     clearInterval(controlID);
                     score.saveHighscore();
+
+                    document.addEventListener('keydown', spacebarPressed, false);
                 }
 
             }, 70);
@@ -84,11 +78,14 @@ function( Snake, Rules, Playground, Score, PlaygroundView ) {
             yDown = evt.touches[0].clientY;
 
             if (!rules.isSnakeAlive(snake.snake, playground.playground)) {
-                snake = new Snake(playground.playground);
-                rules = new Rules(true);
-                score.resetScore();
-                playground.generateFood(playground.playground, snake.snake);
-                controlGame();
+
+                setTimeout(function() {
+                    snake = new Snake(playground.playground);
+                    rules = new Rules(true);
+                    score.resetScore();
+                    playground.generateFood(playground.playground, snake.snake);
+                    controlGame();
+                }, 100);
             }
         }
 
@@ -135,21 +132,24 @@ function( Snake, Rules, Playground, Score, PlaygroundView ) {
                 case 40:
                     snake.validateDirection('bottom');
                     break;
-                case 32:
-                    if (!rules.isSnakeAlive(snake.snake, playground.playground)) {
-                        snake = new Snake(playground.playground);
-                        rules = new Rules(true);
-                        score.resetScore();
-                        playground.generateFood(playground.playground, snake.snake);
-                        controlGame();
-                    }
+            }
+        }
+
+        function spacebarPressed(evt) {
+            if (evt.keyCode === 32) {
+                snake = new Snake(playground.playground);
+                rules = new Rules(true);
+                score.resetScore();
+                playground.generateFood(playground.playground, snake.snake);
+                controlGame();
+
+                document.removeEventListener('keydown', spacebarPressed, false);
             }
         }
 
         function handleResize() {
-            clearInterval(controlID);
             clearTimeout(resizeID);
-            resizeID = setTimeout(doneResizing, 1000);
+            var resizeID = setTimeout(doneResizing, 1000);
         }
 
         function doneResizing() {
