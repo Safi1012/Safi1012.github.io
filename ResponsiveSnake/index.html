@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html manifest="manifest.appcache">
+
+    <head lang="en">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui, user-scalable=no">
+        <link type="text/css" href="stylesheet.css" rel="stylesheet">
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico">
+
+        <!-- iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="img/touch-icon_180.png">
+        <link rel="apple-touch-icon-precomposed" sizes="180x180" href="img/touch-icon_180.png">
+
+        <!-- Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" sizes="196x196" href="img/touch-icon_196.png">
+        <link rel="manifest" href="manifest.json"> <!-- Mobile Chrome > M39 -->
+
+        <title>Snake</title>
+    </head>
+
+
+    <body>
+        <canvas id="playboard">
+
+        </canvas>
+
+        <script data-main="js/main" src="js/require.js"></script>
+        <script language="javascript" type="js/Polyfill/polyfill_requestAnimationFrame.js"></script>
+
+
+        <script type="text/javascript">
+
+            var appCache = window.applicationCache;
+            appCache.update();
+
+            // Is a new cache available?
+            window.addEventListener('load', function(e) {
+
+                window.applicationCache.addEventListener('updateready', function(e) {
+
+                    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+                        // Browser downloaded a new app cache
+
+                        window.applicationCache.swapCache();
+                        if (confirm('A new version of this site is available. Load it?')) {
+                            window.location.reload();
+                        }
+                    } else {
+                        console.log('Manifest didnt changed.')
+                    }
+                }, false);
+
+            }, false);
+
+        </script>
+
+    </body>
+
+</html>
