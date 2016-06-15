@@ -1,0 +1,414 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/xcode.css">
+
+		<!-- Font -->
+		<!--<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>-->
+		<!--<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
+
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi)
+				? 'css/print/pdf.css'
+				: 'css/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- <section class="chapter" data-background="#2a76dd">
+					<h2>Stand der Technik</h2>
+				</section> -->
+
+
+				<section>
+					<h3>Moderne komponentenbasierte <br/>Webentwicklung mit Polymer</h3>
+					<br/>
+					<img data-src="images/polymer.svg" class="image--polymer"/>
+					<br/>
+					<p style="text-align: center">Filipe Santos Correa</p>
+				</section>
+
+
+				<section>
+					<h2>Gliederung</h2>
+					<ul>
+						<!-- <li>Stand der Technik</li> -->
+						<li>Web Components</li>
+						<li>Polymer</li>
+						<li>Erstellen von Custom Elements</li>
+						<li>Fazit</li>
+					</ul>
+				</section>
+
+
+				<!-- <section>
+					<h2>Stand der Technik</h2>
+					<ul>
+						<li>HTML, CSS, JS</li>
+						<li>Libraries</li>
+						<li>Frameworks</li>
+						<li>Web Components</li>
+					</ul>
+				</section> -->
+
+				<section class="chapter" data-background="#2a76dd">
+					<h2>Web Components</h2>
+				</section>
+
+				<section>
+					<h2>Web Components</h2>
+					<ul>
+						<li>HTML Imports</li>
+						<li>Custom Elements</li>
+						<li>Shadow DOM</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<h3>HTML Imports</h3>
+					<p><b>Bisher:</b>  iFrame, AJAX</p>
+					<p><b>Multimedia:</b></p>
+<pre>
+<code>
+  &lt;img src=&quot;dog.jpg&quot;&gt;
+  &lt;audio src=&quot;music.mp3&quot;&gt;
+  &lt;video src=&quot;video.mp4&quot;&gt;
+</code>
+</pre>
+					<p><b>HTML Imports:</b></p>
+<pre>
+<code>
+  &lt;link rel="import" href="/imports/table.html"&gt;
+</code>
+</pre>
+				</section>
+
+
+
+				<section>
+					<h2>Custom Elements</h2>
+					<ul>
+						<li>HTML-Elemente</li>
+						<li>Markup, Styling und Verhalten</li>
+						<li><code>&lt;my-button&gt;&lt;/my-button&gt;</code></li>
+					</ul>
+				</section>
+
+
+
+				<section>
+					<h2>Shadow DOM</h2>
+					<ul>
+						<li><b>D</b>ocument <b>O</b>bject <b>M</b>odel</li>
+						<li>Schnittstelle:</li>
+						<ul>
+							<li style="line-height: 1.2">Inhalt</li>
+							<li style="line-height: 1.2">Struktur</li>
+							<li style="line-height: 1.2">Styles</li>
+						</ul>
+						<li>Dokumente als DOM-Baum im Browser dargestellt</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<h2>Shadow DOM</h2>
+					<br/>
+					<img data-src="images/shadow.png">
+					<br/>
+				</section>
+
+
+				<section>
+					<h2>Anwendungsfälle</h2>
+					<img class="image--drive" data-src="images/GoogleDrive_small.png">
+				</section>
+
+
+				<section>
+					<h2>Anwendungsfälle</h2>
+					<img class="image--dom" data-src="images/Drive_2.png">
+					<img class="image--dom" data-src="images/DOM_new.png">
+				</section>
+
+
+				<section>
+					<h2>Browserkompatibilität</h2>
+					<br>
+					<img data-src="images/B_Standard.png">
+					<p style="text-align: center; margin-top: 0">Standard Unterstützung</p>
+				</section>
+
+
+				<section>
+					<h2>Browserkompatibilität</h2>
+					<br>
+					<img data-src="images/B_Polyfill.png">
+					<p style="text-align: center; margin-top: 0">Polyfill - <i>webcomponent.js</i></p>
+				</section>
+
+				<section class="chapter" data-background="#2a76dd">
+					<h2>Polymer</h2>
+				</section>
+
+				<section>
+					<h2>Polymer</h2>
+					<ul>
+						<li>Library um Custom Elements zu schreiben</li>
+						<li>Liefert Polyfill für besseren Browsersupport</li>
+						<li>Templating, Two-Way Data Binding und Property Observation</li>
+						<li>Wird von Google entwickelt</li>
+					</ul>
+				</section>
+
+
+
+				<section>
+					<h2>Architektur</h2>
+					<br>
+					<img class="image--drive" data-src="images/PolymerArchitektur.png">
+				</section>
+
+
+				<section>
+					<h3>Katalog</h3>
+					<iframe class="site--catalog" src="https://elements.polymer-project.org/"></iframe>
+				</section>
+
+
+				<section class="chapter" data-background="#2a76dd">
+					<h2>Erstellen von Custom Elements</h2>
+				</section>
+
+				<!-- <section>
+					<h3>Aufsetzen eines Polymer Projektes</h3>
+					<br>
+					<ol>
+						<li>Node.JS installieren</li>
+						<li>Polymer CLI installieren</li>
+<pre data-trim data-noescape style="width: 100%; margin-top: 0;">
+<code>
+  npm install -g polymer-cli
+</code>
+</pre>
+						<li>Polymer Projekt initialisieren</li>
+<pre data-trim data-noescape style="width: 100%; margin-top: 0;">
+<code>
+  polymer init app-drawer-template
+</code>
+</pre>
+						<li>Polymer Projekt ausliefern</li>
+<pre data-trim data-noescape style="width: 100%; margin-top: 0;">
+<code>
+  polymer serve --open
+</code>
+</pre>
+					</ol>
+				</section> -->
+
+
+				<!-- <section>
+					<h3>Polymer Projekt</h3>
+					<iframe class="site--catalog" data-src="http://localhost:8080"></iframe>
+				</section> -->
+
+
+				<section>
+					<h2>Erstellen eines Custom Elements</h2>
+					<img class="image--dom" data-src="images/me.png">
+				</section>
+
+
+
+				<section>
+					<h3>Erstellen eines Elements</h3>
+
+
+
+<pre style="width: 100%; margin-top: 0;" class="pre--createElemente">
+<code data-trim data-noescape>  <!--  class="line-numbers" -->
+<span class="fragment fade-in" data-fragment-index="1">&lt;link rel=&quot;import&quot; href=&quot;../bower_components/polymer/polymer.html&quot;&gt;</span>
+
+<span class="fragment fade-in" data-fragment-index="2">&lt;dom-module id=&quot;fsc-profile&quot;&gt;</span>
+
+  <span class="fragment fade-in" data-fragment-index="5">&lt;template&gt;</span>
+    <span class="fragment fade-in" data-fragment-index="7">&lt;style&gt;
+      :host { ... }
+    &lt;/style&gt;</span>
+    <span class="fragment fade-in" data-fragment-index="6">&lt;img class=&quot;fsc-profile-image&quot; src=&quot;{{image-url}}&quot;/&gt;
+    &lt;p class=&quot;fsc-profile-name&quot;&gt;{{name}}&lt;/p&gt;</span>
+  <span class="fragment fade-in" data-fragment-index="5">&lt;/template&gt;</span>
+
+  <span class="fragment fade-in" data-fragment-index="3">&lt;script&gt;
+    Polymer({
+      is: &rsquo;fsc-profile&rsquo;,</span>
+      <span class="fragment fade-in" data-fragment-index="4">properties: {
+        imageUrl: String,
+        name: String
+      }</span>
+    <span class="fragment fade-in" data-fragment-index="3">});</span>
+  <span class="fragment fade-in" data-fragment-index="3">&lt;/script&gt;</span>
+
+<span class="fragment fade-in" data-fragment-index="2">&lt;/dom-module&gt;</span>
+</code>
+</pre>
+				</section>
+
+
+
+				<section>
+					<h2>Aufrufen des Elements</h2>
+
+					<ol>
+						<li>Importieren des Elements</li>
+<pre data-trim data-noescape style="width: 100%; margin-top: 0;" class="pre--createElemente">
+<code>
+  &lt;link rel=&quot;import&quot; href=&quot;fsc-profile.html&quot;&gt;
+</code>
+</pre>
+						<li>Instanziierung des Elements</li>
+<pre data-trim data-noescape style="width: 100%; margin-top: 0;" class="pre--createElemente">
+<code>
+  &lt;fsc-profile image-url=&quot;myself.png&quot; name=&quot;Filipe Santos Correa&quot;&gt;&lt;/fsc-profile&gt;
+</code>
+</pre>
+					</ol>
+				</section>
+
+
+				<section>
+					<h2>Shadow vs Shady</h2>
+					<!--<img class="image--shadowshady" data-src="images/ss.png">-->
+					
+					
+					<div class="column_flex">
+						<div class="row_flex">
+							<p>Shadow DOM</p>
+							<img class="image--shadowshady" data-src="images/shadow_11.png">
+						</div>
+						<div class="row_flex">
+							<p>Shady DOM</p>
+							<img class="image--shadowshady" data-src="images/shady_11.png">
+						</div>
+					</div>
+					
+				</section>
+
+
+
+
+				<section>
+					<h3>Customelements.io</h3>
+					<iframe class="site--catalog" src="https://customelements.io/"></iframe>
+				</section>
+
+
+
+
+				<section>
+					<h2>Einschränkungen</h2>
+
+					<ul>
+						<li>Polymer 0.5 nicht kompatibel mit 1.0</li>
+						<li>Shady DOM und Shadow DOM</li>
+						<li>Nur native Elemente können erweitert werden</li>
+					</ul>
+				</section>
+
+
+				<section class="chapter" data-background="#2a76dd">
+					<h2>Fazit</h2>
+				</section>
+
+
+				<section>
+					<h2>Fazit</h2>
+
+					<ul>
+						<li>Komponentenbasierte Web-Entwicklung sinnvoll</li>
+						<li>Polymer setzt auf W3C Standards</li>
+						<li>Polymer erleichtert das Erstellen von Komponenten</li>
+						<li>Polymer wird bereits produktiv verwendet</li>
+						<!-- <li>Wird sich die komponentenbasierte Entiwcklung sich für das Web durchseten?</li> -->
+					</ul>
+				</section>
+
+
+				<section class="chapter" data-background="#2a76dd">
+					<!-- <h2>Danke für eure Aufmerksamkeit!</h2> -->
+					<h2>Danke fürs Zuhören!</h2>
+					<br><br><br>
+					<h3>Fragen?</h3>
+				</section>
+
+
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				controls: false,
+				center: true,
+				hideAddressBar: true,
+				touch: true,
+				progress: true,
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+					// 13: 'next', // go to the next slide when the ENTER key is pressed
+					// 27: function() {}, // do something custom when ESC is pressed
+					// 32: null // don't do anything when SPACE is pressed (i.e. disable a reveal.js default binding)
+				},
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{
+						src: 'plugin/markdown/marked.js'
+					}, {
+						src: 'plugin/markdown/markdown.js'
+					}, {
+						src: 'plugin/notes/notes.js',
+						async: true
+					},
+					{
+						src: 'plugin/highlight/highlight.js',
+						async: true,
+						callback: function () {
+							hljs.initHighlightingOnLoad();
+						}
+					}, {
+						src: 'lib/js/line-numbers.js'
+					}
+				]
+			});
+			Reveal.configure({ slideNumber: 'c/t' });
+		</script>
+	</body>
+</html>
