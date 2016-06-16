@@ -10,27 +10,8 @@
 @import "../template/settings";
 // ---------------------------------------------
 
-
 // Include theme-specific fonts
 @import url(../../lib/font/source-sans-pro/source-sans-pro.css);
-
-@font-face {
-	font-family: 'Open Sans';
-	font-style: normal;
-	font-weight: 300;
-	src: local('Open Sans'),
-	url(fonts/Open_Sans/OpenSans-Light.ttf) format('ttf');
-}
-@font-face {
-	font-family: 'Montserrat';
-	font-style: bold;
-	font-weight: 600;
-	src: local('Montserrat'),
-	url(fonts/Montserrat/Montserrat-Bold.ttf) format('ttf');
-}
-
-
-
 
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: #fff;
@@ -59,7 +40,6 @@ section.has-dark-background {
 		color: #fff;
 	}
 }
-
 
 // Theme template ------------------------------
 @import "../template/theme";
