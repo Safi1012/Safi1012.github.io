@@ -1,8 +1,9 @@
 var serviceWorkerOption = {
   "assets": [
-    "/main.js",
-    "/polyfills.js",
-    "/styles.css"
+    "/SoundCloudNgRx/main.js",
+    "/SoundCloudNgRx/polyfills.js",
+    "/SoundCloudNgRx/styles.css",
+    "/SoundCloudNgRx/index.html"
   ]
 };
         
