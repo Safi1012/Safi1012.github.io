@@ -1598,7 +1598,7 @@ export const executeModule = async () => {
       : filename.indexOf(dataURIPrefix) === 0
   }
 
-  let wasmBinaryFile = 'https://github.com/Safi1012/shrink-me-assets/raw/main/gs.wasm'
+  let wasmBinaryFile = 'https://safi1012.github.io/shrink-me-assets/gs.wasm'
 
   function getBinary() {
     try {
