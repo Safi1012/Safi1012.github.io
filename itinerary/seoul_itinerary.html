@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seoul — 6 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e0f;
+  --surface: #161618;
+  --border: #2a2a2d;
+  --text: #e8e6e1;
+  --muted: #6b6a66;
+  --accent: #e8973a;
+  --cafe:   #a0784a;
+  --food:   #c94040;
+  --park:   #4a8c4f;
+  --arch:   #5b6ec7;
+  --shop:   #a855a0;
+  --view:   #e8973a;
+  --bar:    #1c8080;
+  --skin:   #c46a90;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans:  'DM Sans', sans-serif;
+  --mono:  'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── noise texture overlay ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+.page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 56px 32px 80px; }
+
+/* ── header ── */
+header { margin-bottom: 64px; }
+
+.header-kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(44px, 8vw, 72px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.header-meta {
+  display: flex; flex-wrap: wrap; gap: 8px 20px;
+  font-size: 13px; color: var(--muted);
+  font-family: var(--mono);
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin-top: 20px;
+}
+
+.header-meta span { display: flex; align-items: center; gap: 6px; }
+.header-meta span::before { content: '—'; color: var(--accent); }
+
+/* ── day tabs ── */
+.day-nav {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 40px;
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.day-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  padding: 6px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all .18s;
+}
+.day-btn:hover { border-color: var(--accent); color: var(--accent); }
+.day-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0e0e0f;
+  font-weight: 500;
+}
+
+/* ── day panel ── */
+.day-panel { display: none; animation: fadeIn .25s ease; }
+.day-panel.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.day-header {
+  margin-bottom: 32px;
+}
+
+.day-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.day-title {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -.015em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.day-area {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0 6px;
+}
+
+.day-area .hood {
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.day-area .hood + .hood::before { content: '·'; color: var(--border); }
+
+/* ── entries ── */
+.entries { display: flex; flex-direction: column; }
+
+.entry {
+  display: grid;
+  grid-template-columns: 56px 6px 1fr;
+  gap: 0 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.entry:last-child { border-bottom: none; }
+
+.entry-time {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  padding-top: 3px;
+  text-align: right;
+}
+
+.entry-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.entry-body {}
+
+.entry-name {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.3;
+  transition: color .15s;
+}
+.entry-name:hover { color: var(--accent); }
+
+.entry-name .map-icon {
+  opacity: 0;
+  font-size: 11px;
+  transition: opacity .15s;
+  color: var(--accent);
+}
+.entry:hover .entry-name .map-icon { opacity: 1; }
+
+.entry-badges {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-left: 4px;
+}
+
+.badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .06em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.badge-mandatory {
+  background: rgba(232, 151, 58, .12);
+  color: var(--accent);
+  border: 1px solid rgba(232, 151, 58, .25);
+}
+
+.entry-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* dot colors by category */
+.dot-cafe  { background: var(--cafe); }
+.dot-food  { background: var(--food); }
+.dot-park  { background: var(--park); }
+.dot-arch  { background: var(--arch); }
+.dot-shop  { background: var(--shop); }
+.dot-view  { background: var(--view); }
+.dot-bar   { background: var(--bar);  }
+.dot-skin  { background: var(--skin); }
+
+/* category tag on entry hover */
+.entry-cat {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  display: none;
+}
+
+/* ── booking notes ── */
+.notes-section {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.notes-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.note-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 8px 24px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.note-item:last-child { border-bottom: none; }
+.note-place { font-weight: 500; color: var(--text); }
+.note-text  { color: var(--muted); }
+
+/* ── legend ── */
+.legend {
+  margin-top: 48px;
+  display: flex; flex-wrap: wrap; gap: 10px 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.leg-item {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.leg-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+}
+
+/* ── footer ── */
+footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── responsive ── */
+@media (max-width: 560px) {
+  .page { padding: 32px 20px 60px; }
+  .entry { grid-template-columns: 44px 6px 1fr; gap: 0 12px; }
+  .note-item { grid-template-columns: 1fr; gap: 2px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <p class="header-kicker">Travel itinerary · May 2025</p>
+    <h1>Six days in<br><em>Seoul</em></h1>
+    <div class="header-meta">
+      <span>Hotel DALSTAIR Seoul Jongno</span>
+      <span>Arrival Sat 9.5. · 14:00 ICN</span>
+      <span>Departure Fri 15.5. · 11:30 ICN</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" aria-label="Days">
+    <button class="day-btn active" onclick="showDay(0)">Sat 9.5</button>
+    <button class="day-btn"        onclick="showDay(1)">Sun 10.5</button>
+    <button class="day-btn"        onclick="showDay(2)">Mon 11.5</button>
+    <button class="day-btn"        onclick="showDay(3)">Tue 12.5</button>
+    <button class="day-btn"        onclick="showDay(4)">Wed 13.5</button>
+    <button class="day-btn"        onclick="showDay(5)">Thu 14.5</button>
+  </nav>
+
+  <!-- DAY 1 -->
+  <section class="day-panel active" id="day-0">
+    <div class="day-header">
+      <p class="day-number">Day 1</p>
+      <h2 class="day-title">Arrival &amp; Jongno</h2>
+      <p class="day-area">
+        <span class="hood">Ikseon-dong</span>
+        <span class="hood">Cheonggyecheon</span>
+      </p>
+    </div>
+    <div class="entries">
+
+      <div class="entry">
+        <span class="entry-time">~16:30</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/JvFzQ6UBk6k1HUsX9" target="_blank">
+            Hotel DALSTAIR Seoul Jongno — check in
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Drop bags, freshen up</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">17:30</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/ir2a8MbM2vecPoq87" target="_blank">
+            Ikseon-dong Hanok Village
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Stroll the lanes, settle into the neighbourhood</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">18:30</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/ir2a8MbM2vecPoq87" target="_blank">
+            Soha Salt Pond Ikseon-dong
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Beautiful setting — afternoon café in Ikseon-dong</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">19:30</span>
+        <span class="entry-dot dot-food"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/2NxjnFH54Y712Lwc6" target="_blank">
+            Myeongdong Kyoja Main Restaurant
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Affordable Michelin — dumplings &amp; knife-cut noodles. Book or queue early.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">21:00</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/bHmhkcXpX6p2qnGNA" target="_blank">
+            Cheonggyecheon Stream — evening walk
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Lit up at night — easy stroll back toward hotel</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="day-panel" id="day-1">
+    <div class="day-header">
+      <p class="day-number">Day 2</p>
+      <h2 class="day-title">Palaces &amp; Markets</h2>
+      <p class="day-area">
+        <span class="hood">Anguk</span>
+        <span class="hood">Bukchon</span>
+        <span class="hood">Gwangjang Market</span>
+        <span class="hood">Naksan</span>
+      </p>
+    </div>
+    <div class="entries">
+
+      <div class="entry">
+        <span class="entry-time">08:30</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/pTsbqjcTYCzsQnVs8" target="_blank">
+            Cafe Onion Anguk
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Breakfast in a converted hanok</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">09:30</span>
+        <span class="entry-dot dot-arch"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://www.google.com/maps?q=Gyeongbokgung+Palace+Seoul" target="_blank">
+            Gyeongbokgung Palace
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Opens 09:00 — go early. ~1.5 hrs.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">11:15</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://www.google.com/maps?q=Changdeokgung+Secret+Garden+Huwon" target="_blank">
+            Secret Garden (Huwon)
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Guided tours only — book well in advance at changdeokgung.go.kr</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">13:00</span>
+        <span class="entry-dot dot-food"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/xEeFHxKTEzwWtfhU8" target="_blank">
+            Gwangjang Market — lunch
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Bindaetteok, mayak gimbap, yukhoe. Eat at the stalls, not the sit-down restaurants.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">14:30</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/i41sUA9KMj1z1Dmf6" target="_blank">
+            Onion Cafe Gwangjang Market Branch
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Right at the market. Afternoon coffee after the chaos.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">15:30</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://www.google.com/maps?q=Bukchon+Hanok+Village+Seoul" target="_blank">
+            Bukchon Hanok Village
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Walk up from Anguk. Best light in the afternoon.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">17:00</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/P9NZGrGBpeMwxtNM7" target="_blank">
+            Naksan Fortress Wall Trail
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Start at Naksan Park. Views over the city. ~1.5 hrs.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">19:00</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://www.google.com/maps?q=Insadong+Seoul" target="_blank">
+            Insadong
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Evening wander — galleries, small shops</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">20:00</span>
+        <span class="entry-dot dot-food"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/xj8Hi2tCDbUGHsJ59" target="_blank">
+            Oreno Ramen Main Store
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Affordable Michelin. Expect a queue.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="day-panel" id="day-2">
+    <div class="day-header">
+      <p class="day-number">Day 3</p>
+      <h2 class="day-title">Mountains &amp; Myeongdong</h2>
+      <p class="day-area">
+        <span class="hood">Inwangsan</span>
+        <span class="hood">Seoullo 7017</span>
+        <span class="hood">Myeongdong</span>
+        <span class="hood">Namsan</span>
+      </p>
+    </div>
+    <div class="entries">
+
+      <div class="entry">
+        <span class="entry-time">08:30</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/bM8CedtFrtus7c7X9" target="_blank">
+            Blue Bottle Studio Seoul
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Iced Nola — one of the must-hit cafés</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">09:30</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/HupYEFfiLdi2fYFq7" target="_blank">
+            Inwangsan Mountain Park
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Morning hike while it's cool. Shamanist rock formations, city views.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">12:00</span>
+        <span class="entry-dot dot-arch"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/ibE7GBFgxxfktAVK6" target="_blank">
+            Seoullo 7017 Skygarden
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Converted highway overpass. Walk it on the way to lunch.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">13:00</span>
+        <span class="entry-dot dot-food"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="http://maps.app.goo.gl/bZv54phJJ6b8aKx37" target="_blank">
+            Myeongdong — lunch &amp; street food
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Night market vendors often run at lunch too</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">14:00</span>
+        <span class="entry-dot dot-shop"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/idtKnMqCtqLFs4hL6" target="_blank">
+            Olive Young Myeongdong + Shopping Street
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Cosmetics, skincare</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">15:30</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/FfnZSp4YNvTJwX8U9" target="_blank">
+            Cheongsudang Bakery
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Beautiful space — afternoon pastry stop</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">17:00</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/XUrkfqB5puy5gixy7" target="_blank">
+            Namsan Sky Forest Trail
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Hike up — or cable car up and walk down</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">18:30</span>
+        <span class="entry-dot dot-view"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://www.google.com/maps?q=Namsan+Park+Seoul" target="_blank">
+            Namsan Park — sunset viewpoint
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Time this for golden hour. Best free viewpoint in Seoul.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">20:00</span>
+        <span class="entry-dot dot-food"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/P1u8AgQsygi2iNJJ8" target="_blank">
+            Kukbingwan — Korean BBQ
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Mandatory. Book ahead.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAY 4 -->
+  <section class="day-panel" id="day-3">
+    <div class="day-header">
+      <p class="day-number">Day 4</p>
+      <h2 class="day-title">Gangnam &amp; Seongsu</h2>
+      <p class="day-area">
+        <span class="hood">Gangnam</span>
+        <span class="hood">Dosan Park</span>
+        <span class="hood">Seongsu</span>
+        <span class="hood">Jamsil</span>
+      </p>
+    </div>
+    <div class="entries">
+
+      <div class="entry">
+        <span class="entry-time">09:00</span>
+        <span class="entry-dot dot-skin"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/xqgoL7mH9Vu63U5Q8" target="_blank">
+            Shinebeam Gangnam Clinic
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Book appointment in advance</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">11:00</span>
+        <span class="entry-dot dot-shop"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/qiAyZGvUoQDKvrZN7" target="_blank">
+            Gentle Monster Haus Nowhere Dosan
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Art-installation sunglasses. Also visit <a href="https://maps.app.goo.gl/pdDGzH9jezDFKuKo9" target="_blank" style="color:var(--accent)">HAUS NOWHERE SEOUL ↗</a></p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">12:00</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/ffoQGwGjBRAERiFq6" target="_blank">
+            NUDAKE Haus Dosan
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Very artsy patisserie — works as brunch/café</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">13:30</span>
+        <span class="entry-dot dot-food"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/afASAbfAWg6Vctrh9" target="_blank">
+            Neungdong Minari Seongsu
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Affordable Michelin — water parsley speciality</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">15:00</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/22RMRjm1ZufFMJH67" target="_blank">
+            I'm donut? Seongsu
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Several great bakery options in Seongsu — also consider <a href="https://maps.app.goo.gl/ad8iBzb5dzWEMPuT7" target="_blank" style="color:var(--accent)">Abebe Bakery ↗</a></p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">16:00</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/BrUfTQuRSBQAyGHB8" target="_blank">
+            Seokchon Lake Park
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Walk around the lake. Lotte World Tower looms over it — great photos.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">17:30</span>
+        <span class="entry-dot dot-shop"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.google.com/?q=Starfield+Library+Seoul" target="_blank">
+            Starfield Library &amp; COEX Mall
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">The library is free and stunning. Take your time here.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">19:30</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://www.google.com/maps?q=Banpo+Hangang+Park+Seoul" target="_blank">
+            Banpo Hangang Park
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">Evening walk along the Han River. Moonlight Rainbow Fountain runs evenings.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">21:00</span>
+        <span class="entry-dot dot-bar"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/ctikknJ5Way24gx29" target="_blank">
+            ZEST SEOUL
+            <span class="map-icon">↗</span>
+          </a>
+          <span class="badge badge-mandatory">★ mandatory</span>
+          <p class="entry-note">World's Top 50 bar — reserve a table</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAY 5 -->
+  <section class="day-panel" id="day-4">
+    <div class="day-header">
+      <p class="day-number">Day 5</p>
+      <h2 class="day-title">Yeonnam &amp; Itaewon</h2>
+      <p class="day-area">
+        <span class="hood">Yeonnam-dong</span>
+        <span class="hood">Hongdae</span>
+        <span class="hood">Dongdaemun</span>
+        <span class="hood">Itaewon</span>
+      </p>
+    </div>
+    <div class="entries">
+
+      <div class="entry">
+        <span class="entry-time">09:00</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/i48JyS33QtL9j1xE9" target="_blank">
+            Coffee Nap Roasters Yeonnam
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Interesting architecture — calm neighbourhood breakfast</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">11:00</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/6ep3A6zo8D1HMgnh9" target="_blank">
+            Perception
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Amazing cookies — or try <a href="https://maps.app.goo.gl/z2WEspSwW7J8ts6P9" target="_blank" style="color:var(--accent)">sobb ↗</a> for cinnamon rolls, <a href="https://maps.app.goo.gl/PykPcqz4ESTqKm2m6" target="_blank" style="color:var(--accent)">oil press ↗</a> for croissants</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">13:00</span>
+        <span class="entry-dot dot-food"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/BpddXw6ovSnnkFXz5" target="_blank">
+            Cactus Curry Club
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Something different from Korean — or <a href="https://maps.app.goo.gl/YBh4Nvo1x2PRcpvg9" target="_blank" style="color:var(--accent)">The Taco Booth ↗</a></p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">14:30</span>
+        <span class="entry-dot dot-arch"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/TyFZzGrsAhs97jpX7" target="_blank">
+            Dongdaemun Design Plaza (DDP)
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Zaha Hadid architecture. Check what exhibitions are on.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">16:00</span>
+        <span class="entry-dot dot-arch"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://www.google.com/maps?q=Heunginjimun+Gate+Seoul" target="_blank">
+            Heunginjimun Gate (Dongdaemun)
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Right next to DDP — quick stop</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">17:00</span>
+        <span class="entry-dot dot-shop"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/mH1ZkS9zgnZApz2J6" target="_blank">
+            Itaewon — neighbourhood wander
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Independent shops, antiques, design stores. Less touristy than Myeongdong.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">19:30</span>
+        <span class="entry-dot dot-food"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/GUikooVdLDZSeeCp7" target="_blank">
+            earth social pizza — Itaewon
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">Neapolitan pizza if you want something different</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAY 6 -->
+  <section class="day-panel" id="day-5">
+    <div class="day-header">
+      <p class="day-number">Day 6</p>
+      <h2 class="day-title">Early departure</h2>
+      <p class="day-area">
+        <span class="hood">Hotel area</span>
+        <span class="hood">Seoul Station → ICN</span>
+      </p>
+    </div>
+    <div class="entries">
+
+      <div class="entry">
+        <span class="entry-time">06:30</span>
+        <span class="entry-dot dot-cafe"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://maps.app.goo.gl/uGJjjpYD4WCt3GAi9" target="_blank">
+            Jayeondo Sogeumppang — salt bread
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">If it opens early enough — otherwise hotel or convenience store</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">07:30</span>
+        <span class="entry-dot dot-park"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://www.google.com/maps?q=Jogyesa+Temple+Seoul" target="_blank">
+            Jogyesa Temple (optional)
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">5 min from hotel — quiet in the early morning</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="entry-time">08:30</span>
+        <span class="entry-dot dot-view"></span>
+        <div class="entry-body">
+          <a class="entry-name" href="https://www.google.com/maps?q=Seoul+Station+AREX" target="_blank">
+            Depart for ICN via AREX
+            <span class="map-icon">↗</span>
+          </a>
+          <p class="entry-note">AREX from Seoul Station ~43 min. Leave by 08:30 for 11:30 departure.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BOOKING NOTES -->
+  <div class="notes-section">
+    <p class="notes-title">Book in advance</p>
+    <div class="note-item">
+      <span class="note-place">Secret Garden</span>
+      <span class="note-text">Guided tours only, limited slots. Book at <a href="https://www.changdeokgung.go.kr" target="_blank" style="color:var(--accent)">changdeokgung.go.kr ↗</a></span>
+    </div>
+    <div class="note-item">
+      <span class="note-place">ZEST SEOUL</span>
+      <span class="note-text">Reservations strongly recommended. Check their Instagram or website.</span>
+    </div>
+    <div class="note-item">
+      <span class="note-place">Kukbingwan</span>
+      <span class="note-text">Popular — book ahead.</span>
+    </div>
+    <div class="note-item">
+      <span class="note-place">Shinebeam Clinic</span>
+      <span class="note-text">Confirm appointment directly with the clinic before travelling.</span>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="leg-item"><span class="leg-dot" style="background:var(--cafe)"></span>Café</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--food)"></span>Food</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--park)"></span>Park / Trail / Area</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--arch)"></span>Architecture</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--shop)"></span>Shopping</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--view)"></span>Viewpoint</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--bar)"></span>Bar</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--skin)"></span>Skin</div>
+  </div>
+
+  <footer>
+    <span>Seoul · May 2025</span>
+    <span>Hotel DALSTAIR Seoul Jongno</span>
+  </footer>
+
+</div>
+
+<script>
+function showDay(i) {
+  document.querySelectorAll('.day-panel').forEach((p, j) => p.classList.toggle('active', i === j));
+  document.querySelectorAll('.day-btn').forEach((b, j) => b.classList.toggle('active', i === j));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
